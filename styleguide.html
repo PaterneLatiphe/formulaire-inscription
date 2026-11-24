@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Styleguide — Concours d'entrepreneuriat (Agrilink) — thème clair</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <div class="stripe" aria-hidden="true"></div>
+
+    <div class="page">
+
+        <h1>Styleguide visuel — Concours d'entrepreneuriat</h1>
+        <p class="muted">Thème clair · Fond Papier · bouton principal Soleil · typographies Bricolage Grotesque + Atkinson Hyperlegible · aucune couleur seule.</p>
+
+        <!-- ==================================================================
+             Champ texte — normal / focus / erreur / désactivé
+             =================================================================== -->
+        <section>
+            <h2>Champ texte</h2>
+
+            <div class="x-field">
+                <label for="sg-text-normal">Nom</label>
+                <input id="sg-text-normal" type="text" placeholder="Ex : TOURE" value="TOURE">
+            </div>
+
+            <div class="x-field">
+                <label for="sg-text-focus">Secteur d'activité</label>
+                <input id="sg-text-focus" type="text" placeholder="Ex : élevage de poulet" autofocus>
+            </div>
+
+            <div class="x-field">
+                <label for="sg-text-erreur">Motivation du projet</label>
+                <input id="sg-text-erreur" type="text" class="err" value="Mon projet" aria-invalid="true">
+                <p class="x-error" role="alert">
+                    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 100 20 10 10 0 000-20zm.75 13h-1.5v-1.5h1.5V15zm0-3.5h-1.5V7.5H12v1.5z"/></svg>
+                    Le numéro doit avoir 8 chiffres.
+                </p>
+            </div>
+
+            <div class="x-field">
+                <label for="sg-text-desactive">Adresse e-mail (membre connecté)</label>
+                <input id="sg-text-desactive" type="email" placeholder="exemple@live.com" disabled>
+                <span class="help">Membre connecté — prérempli à la connexion.</span>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             Champ textearea — normal / erreur
+             =================================================================== -->
+        <section>
+            <h2>Zone de texte (textarea)</h2>
+
+            <div class="x-field">
+                <label for="sg-textarea-normal">Ta motivation</label>
+                <textarea id="sg-textarea-normal" rows="4" placeholder="Raconte ton projet en quelques mots…"></textarea>
+            </div>
+
+            <div class="x-field">
+                <label for="sg-textarea-erreur">Motivation (erreur)</label>
+                <textarea id="sg-textarea-erreur" rows="4" class="err" aria-invalid="true"></textarea>
+                <p class="x-error" role="alert">Ce champ est obligatoire.</p>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             Champ téléphone principal — préfixe +226, 8 chiffres
+             =================================================================== -->
+        <section>
+            <h2>Champ téléphone principal</h2>
+
+            <div class="x-field">
+                <label for="sg-phone">Téléphone</label>
+                <div class="x-phone">
+                    <span class="prefix" aria-hidden="true">+226</span>
+                    <input id="sg-phone" type="tel" inputmode="numeric" maxlength="8" placeholder="01234567" value="671223344">
+                </div>
+                <span class="help">Format attendu : +226 + 8 chiffres.</span>
+            </div>
+
+            <div class="x-field">
+                <label for="sg-whatsapp">WhatsApp (optionnel)</label>
+                <div class="x-phone">
+                    <span class="prefix" aria-hidden="true">+226</span>
+                    <input id="sg-whatsapp" type="tel" inputmode="numeric" maxlength="8" placeholder="01234567">
+                </div>
+                <span class="help">Même numéro que ton téléphone si tu n'en as pas d'autre.</span>
+            </div>
+
+            <div class="x-field">
+                <label for="sg-phone-erreur">Téléphone du parent / tuteur</label>
+                <div class="x-phone">
+                    <span class="prefix" aria-hidden="true">+226</span>
+                    <input id="sg-phone-erreur" type="tel" inputmode="numeric" maxlength="8" class="err" value="12345678" aria-invalid="true">
+                </div>
+                <p class="x-error" role="alert">
+                    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 100 20 10 10 0 000-20zm.75 13h-1.5v-1.5h1.5V15zm0-3.5h-1.5V7.5H12v1.5z"/></svg>
+                    Ce numéro est déjà inscrit.
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             Calendrier de naissance — état fermé
+             =================================================================== -->
+        <section>
+            <h2>Calendrier — état fermé</h2>
+
+            <div class="x-field">
+                <label for="sg-date">Date de naissance</label>
+                <div class="x-calendar" role="group" aria-label="Date de naissance">
+                    <input type="text" id="sg-date" placeholder="JJ/MM/AAAA" maxlength="10" autocomplete="off" spellcheck="false" aria-expanded="false" aria-controls="sg-cal-panel">
+                    <button type="button" class="x-calendar-toggle" aria-label="Ouvrir le calendrier" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </button>
+                    <div class="x-calendar-panel" id="sg-cal-panel" hidden role="dialog" aria-label="Choisir la date">
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Jour</div>
+                            <div class="x-cal-list" data-group="day">
+                                <button type="button" class="x-cal-option" data-value="1" aria-pressed="false">01</button>
+                                <button type="button" class="x-cal-option" data-value="2" aria-pressed="false">02</button>
+                                <button type="button" class="x-cal-option" data-value="3" aria-pressed="false">03</button>
+                                <button type="button" class="x-cal-option" data-value="4" aria-pressed="false">04</button>
+                                <button type="button" class="x-cal-option" data-value="5" aria-pressed="false">05</button>
+                                <button type="button" class="x-cal-option" data-value="6" aria-pressed="false">06</button>
+                            </div>
+                        </div>
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Mois</div>
+                            <div class="x-cal-list" data-group="month">
+                                <button type="button" class="x-cal-option" data-value="1" aria-pressed="false">01</button>
+                                <button type="button" class="x-cal-option" data-value="2" aria-pressed="false">02</button>
+                                <button type="button" class="x-cal-option" data-value="3" aria-pressed="false">03</button>
+                                <button type="button" class="x-cal-option" data-value="4" aria-pressed="false">04</button>
+                                <button type="button" class="x-cal-option" data-value="5" aria-pressed="false">05</button>
+                                <button type="button" class="x-cal-option" data-value="6" aria-pressed="false">06</button>
+                            </div>
+                        </div>
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Année</div>
+                            <div class="x-cal-list" data-group="year" role="group" aria-label="Année">
+                                <button type="button" class="x-cal-option" data-value="2010" aria-pressed="false">2010</button>
+                                <button type="button" class="x-cal-option" data-value="2009" aria-pressed="false">2009</button>
+                                <button type="button" class="x-cal-option" data-value="2008" aria-pressed="false">2008</button>
+                                <button type="button" class="x-cal-option" data-value="2007" aria-pressed="false">2007</button>
+                                <button type="button" class="x-cal-option" data-value="2006" aria-pressed="false">2006</button>
+                                <button type="button" class="x-cal-option" data-value="2005" aria-pressed="false">2005</button>
+                            </div>
+                        </div>
+                        <button type="button" class="x-cal-ok" disabled>OK</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             Calendrier de naissance — état ouvert
+             =================================================================== -->
+        <section>
+            <h2>Calendrier — état ouvert</h2>
+
+            <div class="x-field">
+                <label for="sg-date-ouvert">Date de naissance</label>
+                <div class="x-calendar" role="group" aria-label="Date de naissance">
+                    <input type="text" id="sg-date-ouvert" placeholder="JJ/MM/AAAA" maxlength="10" autocomplete="off" spellcheck="false" aria-expanded="true" aria-controls="sg-cal-panel-ouvert">
+                    <button type="button" class="x-calendar-toggle" aria-label="Ouvrir le calendrier" aria-expanded="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </button>
+                    <div class="x-calendar-panel" id="sg-cal-panel-ouvert" role="dialog" aria-label="Choisir la date">
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Jour</div>
+                            <div class="x-cal-list" data-group="day">
+                                <button type="button" class="x-cal-option" data-value="1" aria-pressed="false">01</button>
+                                <button type="button" class="x-cal-option" data-value="2" aria-pressed="false">02</button>
+                                <button type="button" class="x-cal-option" data-value="3" aria-pressed="false">03</button>
+                                <button type="button" class="x-cal-option" data-value="4" aria-pressed="false">04</button>
+                                <button type="button" class="x-cal-option" data-value="5" aria-pressed="false">05</button>
+                                <button type="button" class="x-cal-option" data-value="6" aria-pressed="false">06</button>
+                            </div>
+                        </div>
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Mois</div>
+                            <div class="x-cal-list" data-group="month">
+                                <button type="button" class="x-cal-option" data-value="1" aria-pressed="false">01</button>
+                                <button type="button" class="x-cal-option" data-value="2" aria-pressed="false">02</button>
+                                <button type="button" class="x-cal-option" data-value="3" aria-pressed="false">03</button>
+                                <button type="button" class="x-cal-option" data-value="4" aria-pressed="false">04</button>
+                                <button type="button" class="x-cal-option" data-value="5" aria-pressed="false">05</button>
+                                <button type="button" class="x-cal-option" data-value="6" aria-pressed="false">06</button>
+                            </div>
+                        </div>
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Année</div>
+                            <div class="x-cal-list" data-group="year" role="group" aria-label="Année">
+                                <button type="button" class="x-cal-option" data-value="2010" aria-pressed="false">2010</button>
+                                <button type="button" class="x-cal-option" data-value="2009" aria-pressed="false">2009</button>
+                                <button type="button" class="x-cal-option" data-value="2008" aria-pressed="false">2008</button>
+                                <button type="button" class="x-cal-option" data-value="2007" aria-pressed="false">2007</button>
+                                <button type="button" class="x-cal-option" data-value="2006" aria-pressed="false">2006</button>
+                                <button type="button" class="x-cal-option" data-value="2005" aria-pressed="false">2005</button>
+                            </div>
+                        </div>
+                        <button type="button" class="x-cal-ok">OK</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             Calendrier de naissance — état rempli
+             =================================================================== -->
+        <section>
+            <h2>Calendrier — état rempli</h2>
+
+            <div class="x-field">
+                <label for="sg-date-rempli">Date de naissance</label>
+                <div class="x-calendar" role="group" aria-label="Date de naissance">
+                    <input type="text" id="sg-date-rempli" placeholder="JJ/MM/AAAA" maxlength="10" autocomplete="off" spellcheck="false" aria-expanded="false" aria-controls="sg-cal-panel-rempli">
+                    <button type="button" class="x-calendar-toggle" aria-label="Ouvrir le calendrier" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </button>
+                    <div class="x-calendar-panel" id="sg-cal-panel-rempli" hidden role="dialog" aria-label="Choisir la date">
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Jour</div>
+                            <div class="x-cal-list" data-group="day">
+                                <button type="button" class="x-cal-option" data-value="15" aria-pressed="true">15</button>
+                                <button type="button" class="x-cal-option" data-value="16" aria-pressed="false">16</button>
+                                <button type="button" class="x-cal-option" data-value="17" aria-pressed="false">17</button>
+                                <button type="button" class="x-cal-option" data-value="18" aria-pressed="false">18</button>
+                                <button type="button" class="x-cal-option" data-value="19" aria-pressed="false">19</button>
+                                <button type="button" class="x-cal-option" data-value="20" aria-pressed="false">20</button>
+                            </div>
+                        </div>
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Mois</div>
+                            <div class="x-cal-list" data-group="month">
+                                <button type="button" class="x-cal-option" data-value="6" aria-pressed="true">06</button>
+                                <button type="button" class="x-cal-option" data-value="7" aria-pressed="false">07</button>
+                                <button type="button" class="x-cal-option" data-value="8" aria-pressed="false">08</button>
+                                <button type="button" class="x-cal-option" data-value="9" aria-pressed="false">09</button>
+                                <button type="button" class="x-cal-option" data-value="10" aria-pressed="false">10</button>
+                                <button type="button" class="x-cal-option" data-value="11" aria-pressed="false">11</button>
+                            </div>
+                        </div>
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Année</div>
+                            <div class="x-cal-list" data-group="year" role="group" aria-label="Année">
+                                <button type="button" class="x-cal-option" data-value="2005" aria-pressed="true">2005</button>
+                                <button type="button" class="x-cal-option" data-value="2004" aria-pressed="false">2004</button>
+                                <button type="button" class="x-cal-option" data-value="2003" aria-pressed="false">2003</button>
+                                <button type="button" class="x-cal-option" data-value="2002" aria-pressed="false">2002</button>
+                                <button type="button" class="x-cal-option" data-value="2001" aria-pressed="false">2001</button>
+                                <button type="button" class="x-cal-option" data-value="2000" aria-pressed="false">2000</button>
+                            </div>
+                        </div>
+                        <button type="button" class="x-cal-ok">OK</button>
+                    </div>
+                    <input type="hidden" name="birth_day" value="15">
+                    <input type="hidden" name="birth_month" value="6">
+                    <input type="hidden" name="birth_year" value="2005">
+                    <p class="muted" style="margin-top:6px;">Tu as 21 ans.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendrier — état erreur -->
+        <section>
+            <h2>Calendrier — état erreur</h2>
+
+            <div class="x-field">
+                <label for="sg-date-erreur">Date de naissance (erreur)</label>
+                <div class="x-calendar" role="group" aria-label="Date de naissance">
+                    <input type="text" id="sg-date-erreur" placeholder="JJ/MM/AAAA" maxlength="10" autocomplete="off" spellcheck="false" class="err" aria-invalid="true">
+                    <button type="button" class="x-calendar-toggle" aria-label="Ouvrir le calendrier" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </button>
+                    <div class="x-calendar-panel" id="sg-cal-panel-erreur" hidden role="dialog" aria-label="Choisir la date">
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Jour</div>
+                            <div class="x-cal-list" data-group="day">
+                                <button type="button" class="x-cal-option" data-value="1" aria-pressed="false">01</button>
+                                <button type="button" class="x-cal-option" data-value="2" aria-pressed="false">02</button>
+                                <button type="button" class="x-cal-option" data-value="3" aria-pressed="false">03</button>
+                                <button type="button" class="x-cal-option" data-value="4" aria-pressed="false">04</button>
+                                <button type="button" class="x-cal-option" data-value="5" aria-pressed="false">05</button>
+                                <button type="button" class="x-cal-option" data-value="6" aria-pressed="false">06</button>
+                            </div>
+                        </div>
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Mois</div>
+                            <div class="x-cal-list" data-group="month">
+                                <button type="button" class="x-cal-option" data-value="1" aria-pressed="false">01</button>
+                                <button type="button" class="x-cal-option" data-value="2" aria-pressed="false">02</button>
+                                <button type="button" class="x-cal-option" data-value="3" aria-pressed="false">03</button>
+                                <button type="button" class="x-cal-option" data-value="4" aria-pressed="false">04</button>
+                                <button type="button" class="x-cal-option" data-value="5" aria-pressed="false">05</button>
+                                <button type="button" class="x-cal-option" data-value="6" aria-pressed="false">06</button>
+                            </div>
+                        </div>
+                        <div class="x-cal-col">
+                            <div class="x-cal-label">Année</div>
+                            <div class="x-cal-list" data-group="year" role="group" aria-label="Année">
+                                <button type="button" class="x-cal-option" data-value="2020" aria-pressed="false">2020</button>
+                                <button type="button" class="x-cal-option" data-value="2019" aria-pressed="false">2019</button>
+                                <button type="button" class="x-cal-option" data-value="2018" aria-pressed="false">2018</button>
+                                <button type="button" class="x-cal-option" data-value="2017" aria-pressed="false">2017</button>
+                                <button type="button" class="x-cal-option" data-value="2016" aria-pressed="false">2016</button>
+                                <button type="button" class="x-cal-option" data-value="2015" aria-pressed="false">2015</button>
+                            </div>
+                        </div>
+                        <button type="button" class="x-cal-ok" disabled>OK</button>
+                    </div>
+                    <input type="hidden" name="birth_day" value="">
+                    <input type="hidden" name="birth_month" value="">
+                    <input type="hidden" name="birth_year" value="">
+                    <p class="x-error" role="alert">Choisis ta date de naissance.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             Sélecteur — liste déroulante
+             =================================================================== -->
+        <section>
+            <h2>Liste déroulante</h2>
+            <div class="x-select">
+                <label for="sg-sel">Type de profil</label>
+                <select id="sg-sel" name="profile_type">
+                    <option value="">Choisir…</option>
+                    <option value="eleve" selected>Élève</option>
+                    <option value="etudiant">Étudiant</option>
+                    <option value="mouvement_jeunes">Mouvement de jeunesse</option>
+                </select>
+                <span class="help">Mouvement de jeunesse : renseigner le mouvement.</span>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             Tuiles de choix — normal / sélectionné
+             =================================================================== -->
+        <section>
+            <h2>Tuiles de choix</h2>
+            <div class="x-tiles" role="radiogroup" aria-label="Genre">
+                <div class="x-tile sel" role="radio" tabindex="0" aria-checked="true" data-value="homme">
+                    <span class="dot"></span>
+                    <span>Homme</span>
+                </div>
+                <div class="x-tile" role="radio" tabindex="0" aria-checked="false" data-value="femme">
+                    <span class="dot"></span>
+                    <span>Femme</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             Boutons — principal / secondaire / désactivé / focus
+             =================================================================== -->
+        <section>
+            <h2>Boutons</h2>
+
+            <button type="button" class="x-btn btn-primary" autofocus>Continuer</button>
+
+            <button type="button" class="x-btn btn-ghost">Retour</button>
+
+            <button type="button" class="x-btn btn-primary" disabled>Continuer</button>
+
+            <p class="muted">Bouton principal : fond Soleil #F5B31A, texte indigo #1E2A5E, hauteur 52 px, pleine largeur mobile.</p>
+            <p class="muted">Bouton secondaire : transparent, texte indigo #1E2A5E, focus outline 3 px décalé de 2 px.</p>
+        </section>
+
+        <!-- ==================================================================
+             Barre de progression
+             =================================================================== -->
+        <section>
+            <h2>Barre de progression</h2>
+            <div class="x-progress" role="progressbar" aria-label="Progression" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40">
+                <div class="fill" style="width: 40%;"></div>
+            </div>
+            <div class="muted" style="margin-top: 6px;">Étape 2 sur 6</div>
+        </section>
+
+        <!-- ==================================================================
+             Message d'erreur / succès
+             =================================================================== -->
+        <section>
+            <h2>Messages</h2>
+            <p class="x-error" role="alert">
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 100 20 10 10 0 000-20zm.75 13h-1.5v-1.5h1.5V15zm0-3.5h-1.5V7.5H12v1.5z"/></svg>
+                Tu dois avoir entre 16 et 25 ans pour participer.
+            </p>
+            <p class="x-success">
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2l-3.4-3.4-1.4 1.4 4.8 4.8 9.2-9.2-1.4-1.4z"/></svg>
+                Ton inscription est enregistrée.
+            </p>
+        </section>
+
+    </div>
+
+    <!-- ==================================================================
+         Barre d'actions fixe — Retour / Continuer
+         =================================================================== -->
+    <div class="x-action">
+        <button type="button" class="x-btn btn-ghost">Retour</button>
+        <button type="button" class="x-btn btn-primary">Continuer</button>
+    </div>
+
+</body>
+</html>

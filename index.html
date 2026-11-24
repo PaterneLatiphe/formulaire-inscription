@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inscription — Concours d'entrepreneuriat (Agrilink)</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/config.js"></script>
+</head>
+<body>
+
+    <div class="page">
+        <div class="stripe" aria-hidden="true"></div>
+        <h1>LIBELLE CONCOURS</h1>
+
+        <form id="the-form" novalidate>
+            <!-- Champ piège anti-spam (vide — Backend rejette si rempli) -->
+            <input type="text" name="telephone_personnel" class="x-hp" tabindex="-1" autocomplete="off" value="">
+
+            <!-- Identité -->
+            <div class="x-row">
+                <div class="x-field"><label for="last_name">Nom</label><input id="last_name" name="last_name" type="text" required></div>
+                <div class="x-field"><label for="first_name">Prénom</label><input id="first_name" name="first_name" type="text" required></div>
+            </div>
+            <div class="x-field">
+                <label>Genre</label>
+                <div class="x-tiles x-tiles-row" role="radiogroup" aria-label="Genre">
+                    <div class="x-tile sel" data-value="M"><span class="dot"></span><span>Homme</span></div>
+                    <div class="x-tile" data-value="F"><span class="dot"></span><span>Femme</span></div>
+                </div>
+            </div>
+            <div class="x-birth" id="birth-fields">
+                <div class="x-field"><label for="birth_day">Jour</label><select id="birth_day" name="birth_day"></select></div>
+                <div class="x-field"><label for="birth_month">Mois</label><select id="birth_month" name="birth_month"></select></div>
+                <div class="x-field"><label for="birth_year">Année</label><select id="birth_year" name="birth_year"></select></div>
+                <input type="hidden" name="birth_date" value="">
+            </div>
+
+            <div class="x-row">
+                <div class="x-field"><label for="telephone">Téléphone</label><div class="x-phone"><span class="prefix" aria-hidden="true">+226</span><input id="telephone" name="telephone" type="tel" inputmode="numeric" maxlength="8"></div><p class="x-error" id="err-telephone" role="alert" hidden></p></div>
+                <div class="x-field"><label for="whatsapp">WhatsApp</label><div class="x-phone"><span class="prefix" aria-hidden="true">+226</span><input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" maxlength="8"></div></div>
+            </div>
+            <div class="x-field"><label for="email">E-mail</label><input id="email" name="email" type="email" placeholder="exemple@gmail.com"></div>
+
+            <!-- Localisation -->
+            <div class="x-field"><label for="arrondissement">Arrondissement</label><div class="x-select"><select id="arrondissement" name="arrondissement"><option value="">Choisir…</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div></div>
+
+            <div class="x-field"><label for="neighborhood">Quartier</label><input id="neighborhood" name="neighborhood" type="text" placeholder="Ex : Ouagadougou"></div>
+
+            <!-- Profil -->
+
+            <div class="x-field"><label for="institution">Établissement</label><input id="institution" name="institution" type="text" placeholder="Ex : Lycée / Université"></div>
+            <div class="x-row">
+                <div class="x-field"><label for="level">Niveau</label><div class="x-select"><select id="level" name="level"><option value="">Choisir…</option><option value="seconde">Seconde</option><option value="premiere">Première</option><option value="terminale">Terminale</option><option value="licence_1">Licence 1</option><option value="licence_2">Licence 2</option><option value="licence_3">Licence 3</option><option value="master_1">Master 1</option><option value="master_2">Master 2</option><option value="doctorat">Doctorat</option></select></div></div>
+                <div class="x-field"><label for="field_of_study">Filière</label><input id="field_of_study" name="field_of_study" type="text" placeholder="Ex : informatique"></div>
+            </div>
+            <div class="x-field"><label for="youth_movement">Mouvement de jeunesse</label><input id="youth_movement" name="youth_movement" type="text" placeholder="Ex : Jeunesse Rurale"></div>
+
+            <!-- Connexion / appareil -->
+
+
+
+
+            <!-- has_internet (oui/non tiles) -->
+            <div class="x-field">
+                <label>As-tu accès à Internet ?</label>
+                <div class="x-tiles x-tiles-row" role="radiogroup" aria-label="As-tu accès à Internet ?">
+                    <div class="x-tile sel" data-value="oui"><span class="dot"></span><span>Oui</span></div>
+                    <div class="x-tile" data-value="non"><span class="dot"></span><span>Non</span></div>
+                </div>
+            </div>
+
+            <!-- Motivation -->
+            <div class="x-field"><label for="motivation">Ta motivation</label><textarea id="motivation" name="motivation" rows="4" required></textarea><p class="x-error" id="err-motivation" role="alert" hidden></p></div>
+
+            <!-- Projet -->
+            <div class="x-field">
+                <label>A un projet</label>
+                <div class="x-tiles x-tiles-row" role="radiogroup" aria-label="A un projet">
+                    <div class="x-tile sel" data-value="oui"><span class="dot"></span><span>Oui</span></div>
+                    <div class="x-tile" data-value="non"><span class="dot"></span><span>Non</span></div>
+                </div>
+                <input type="hidden" name="has_project" value="oui">
+            </div>
+            <div class="x-field"><label for="project_sector">Secteur du projet</label><input id="project_sector" name="project_sector" type="text" placeholder="Ex : agriculture"></div>
+            <div class="x-field"><label for="project_description">Description du projet</label><textarea id="project_description" name="project_description" rows="3"></textarea></div>
+            <div class="x-field"><label for="project_stage">Stade du projet</label><div class="x-select"><select id="project_stage" name="project_stage"><option value="">Choisir…</option><option value="idee">Idée</option><option value="prototype">Prototype</option><option value="deploiement">Déploiement</option></select></div></div>
+
+            <!-- Formation passée -->
+            <div class="x-field">
+                <label>A déjà suivi une formation</label>
+                <div class="x-tiles x-tiles-row" role="radiogroup" aria-label="A déjà suivi une formation">
+                    <div class="x-tile" data-value="oui"><span class="dot"></span><span>Oui</span></div>
+                    <div class="x-tile sel" data-value="non"><span class="dot"></span><span>Non</span></div>
+                </div>
+                <input type="hidden" name="had_previous_training" value="non">
+            </div>
+
+            <div class="x-field"><label for="discovery_source">Comment as-tu connu le concours ?</label><input id="discovery_source" name="discovery_source" type="text" required></div>
+
+            <!-- Tuteur — affiché uniquement si le candidat est mineur -->
+            <div id="guardian-block" hidden>
+                <div class="x-field">
+                    <label>Parent ou tuteur (si tu as moins de 18 ans)</label>
+                    <input type="hidden" name="guardian_consent" value="">
+                </div>
+                <div class="x-row">
+                    <div class="x-field"><label for="guardian_name">Nom du parent / tuteur</label><input id="guardian_name" name="guardian_name" type="text"><p class="x-error" id="err-guardian_name" role="alert" hidden></p></div>
+                    <div class="x-field"><label for="guardian_phone">Téléphone du parent / tuteur</label><div class="x-phone"><span class="prefix" aria-hidden="true">+226</span><input id="guardian_phone" name="guardian_phone" type="tel" inputmode="numeric" maxlength="8"></div><p class="x-error" id="err-guardian_phone" role="alert" hidden></p></div>
+                </div>
+            </div>
+
+            <!-- Consentements -->
+            <div class="x-field">
+                <label>Consentements</label>
+                <div class="x-tiles" role="radiogroup" aria-label="Consentements">
+                    <div class="x-tile" data-value="true"><span class="dot"></span><span>J'accepte <a href="documents/consentement.html" target="_blank" rel="noopener">les règles de confidentialité</a></span></div>
+                </div>
+                <input type="hidden" name="data_consent" value="">
+                <input type="hidden" name="rules_accepted" value="">
+            </div>
+
+            <!--idonnes cachées : timing / submission_id — Backend les attend -->
+            <input type="hidden" name="started_at" value="">
+            <input type="hidden" name="submission_id" value="">
+        </form>
+    </div>
+
+    <div id="status-message" class="x-success" hidden></div>
+
+    <div class="x-action">
+        <button type="button" class="x-btn btn-primary" id="btn-submit">S'inscrire</button>
+    </div>
+
+    <script>
+        const statusMsg = document.getElementById('status-message');
+        const btn = document.getElementById('btn-submit');
+
+        const showStatus = (text, isError) => {
+            statusMsg.textContent = text;
+            statusMsg.hidden = !text;
+            statusMsg.className = 'x-success' + (isError ? ' x-error' : '');
+        };
+
+        const addError = (field, msg) => {
+            const f = document.getElementById(field);
+            if (!f) { return; }
+            f.classList.add('err');
+            const err = document.getElementById('err-' + field);
+            if (err) { err.textContent = msg; err.hidden = false; }
+        };
+
+        const clearErrors = () => {
+            document.querySelectorAll('.err').forEach((el) => el.classList.remove('err'));
+            document.querySelectorAll('[id^="err-"]').forEach((el) => { el.hidden = true; el.textContent = ''; });
+        };
+
+        // Tiles — sélection unique au clic (désélection du précédent)
+        const selectTile = (group, tile) => {
+            group.querySelectorAll('.x-tile').forEach((t) => { t.classList.toggle('sel', t === tile); });
+        };
+        document.addEventListener('click', (e) => {
+            const tile = e.target.closest('.x-tile');
+            if (tile) { selectTile(tile.closest('.x-tiles'), tile); }
+        });
+
+        // ---------- Date de naissance — sélecteurs natifs (Jour / Mois / Année) ----------
+        const birthDay = document.getElementById('birth_day');
+        const birthMonth = document.getElementById('birth_month');
+        const birthYear = document.getElementById('birth_year');
+        const calMonthsN = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+        const fillSelect = (select, values, textFn) => {
+            select.innerHTML = '';
+            values.forEach((v) => {
+                const o = document.createElement('option');
+                o.value = String(v);
+                o.textContent = textFn ? textFn(v) : String(v);
+                select.appendChild(o);
+            });
+        };
+        fillSelect(birthYear, Array.from({ length: 101 }, (_, i) => 1930 + i));
+        fillSelect(birthMonth, Array.from({ length: 12 }, (_, i) => i + 1), (v) => calMonthsN[v - 1]);
+        fillSelect(birthDay, Array.from({ length: 31 }, (_, i) => i + 1));
+        // Tuteur — visible uniquement si le candidat est mineur (< 18 ans)
+        const computeAgeFrom = (y, m, d) => {
+            if (!y || !m || !d) { return null; }
+            const yy = Number(y), mm = Number(m), dd = Number(d);
+            if (isNaN(yy) || isNaN(mm) || isNaN(dd)) { return null; }
+            const birth = new Date(yy, mm - 1, dd);
+            if (isNaN(birth.getTime())) { return null; }
+            const now = new Date();
+            let age = now.getFullYear() - yy;
+            if (now.getMonth() < mm - 1 || (now.getMonth() === mm - 1 && now.getDate() < dd)) { age -= 1; }
+            return age;
+        };
+        const guardianBlock = document.getElementById('guardian-block');
+        // Bouton désactivé tant que les champs obligatoires ne sont pas remplis
+        const computeButtonState = () => {
+            let valid = true;
+            ['last_name', 'first_name', 'telephone', 'motivation', 'discovery_source'].forEach((id) => {
+                const el = document.getElementById(id);
+                if (el && !String(el.value).trim()) { valid = false; }
+            });
+            const tel = document.getElementById('telephone');
+            if (tel && String(tel.value).replace(/[^0-9]/g, '').length !== 8) { valid = false; }
+            // Si mineur : tuteur requis
+            if (guardianBlock && !guardianBlock.hidden) {
+                const gName = document.getElementById('guardian_name');
+                const gPhone = document.getElementById('guardian_phone');
+                if (gName && !String(gName.value).trim()) { valid = false; }
+                if (gPhone && String(gPhone.value).replace(/[^0-9]/g, '').length !== 8) { valid = false; }
+            }
+            btn.disabled = !valid;
+        };
+        const updateGuardianVisibility = () => {
+            const age = computeAgeFrom(birthYear.value, birthMonth.value, birthDay.value);
+            guardianBlock.hidden = !(age !== null && age < 18);
+            computeButtonState();
+        };
+        birthYear.addEventListener('change', updateGuardianVisibility);
+        birthMonth.addEventListener('change', updateGuardianVisibility);
+        birthDay.addEventListener('change', updateGuardianVisibility);
+        updateGuardianVisibility();
+
+        // Collecte → { ... } selon le contrat backend
+        // started_at : fixé une seule fois à la première ouverture du formulaire,
+        // conservé en localStorage, effacé uniquement après un envoi réussi
+        const STARTED_AT_KEY = 'inscription_started_at';
+        const formStartedAt = (() => {
+            const stored = window.localStorage ? window.localStorage.getItem(STARTED_AT_KEY) : null;
+            if (stored) { return Number(stored); }
+            const t = Date.now();
+            try { window.localStorage.setItem(STARTED_AT_KEY, String(t)); } catch (e) {}
+            return t;
+        })();
+        let submissionId = null; // conservé pour « Réessayer »
+
+        const collectData = () => {
+            const d = {};
+            document.querySelectorAll('#the-form input, #the-form select, #the-form textarea').forEach((el) => {
+                if (el.name && el.name !== 'telephone_personnel' && !['birth_day', 'birth_month', 'birth_year'].includes(el.name)) { d[el.name] = el.value; }
+            });
+            // birth_date au format AAAA-MM-JJ depuis les trois sélecteurs natifs
+            const y = birthYear.value;
+            const m = birthMonth.value;
+            const dd = birthDay.value;
+            if (y && m && dd) { d.birth_date = y + '-' + String(m).padStart(2, '0') + '-' + String(dd).padStart(2, '0'); }
+            // Si mineur : consentement du tuteur implicite (pas de case à cocher)
+            if (guardianBlock && !guardianBlock.hidden) { d.guardian_consent = 'true'; }
+            // Tuiles → champs contrat (gender, lives_in_ouaga, has_internet, consentements…)
+            const keyMap = {
+                'Genre': 'gender',
+                'As-tu accès à Internet ?': 'has_internet',
+                'A un projet': 'has_project',
+                'A déjà suivi une formation': 'had_previous_training',
+                'Consentements': ['data_consent', 'rules_accepted']
+            };
+            document.querySelectorAll('#the-form .x-tiles').forEach((g) => {
+                const sel = g.querySelector('.x-tile.sel');
+                const keys = keyMap[g.getAttribute('aria-label')];
+                const val = sel ? sel.getAttribute('data-value') : '';
+                if (keys) { (Array.isArray(keys) ? keys : [keys]).forEach((k) => { d[k] = val; }); }
+            });
+            d.started_at = formStartedAt;
+            if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+                if (!submissionId) { submissionId = crypto.randomUUID(); }
+                d.submission_id = submissionId;
+            }
+            return d;
+        };
+
+        // Validation légère avant envoi
+        const validate = () => {
+            let ok = true;
+            const req = [
+                ['last_name', 'Nom obligatoire.'],
+                ['first_name', 'Prénom obligatoire.'],
+                ['telephone', 'Le numéro de téléphone est obligatoire.'],
+                ['motivation', 'La motivation est obligatoire.'],
+                ['discovery_source', 'Comment as-tu connu le concours ?']
+            ];
+            req.forEach(([id, msg]) => {
+                const el = document.getElementById(id);
+                if (el && !el.value.trim()) { addError(id, msg); ok = false; }
+            });
+            const tel = document.getElementById('telephone');
+            if (tel && tel.value.replace(/[^0-9]/g, '').length !== 8) {
+                addError('telephone', 'Le numéro doit avoir 8 chiffres.');
+                ok = false;
+            }
+            // Validation tuteur si mineur
+            if (guardianBlock && !guardianBlock.hidden) {
+                const gName = document.getElementById('guardian_name');
+                const gPhone = document.getElementById('guardian_phone');
+                if (gName && !gName.value.trim()) { addError('guardian_name', 'Nom du parent / tuteur obligatoire.'); ok = false; }
+                if (gPhone && gPhone.value.replace(/[^0-9]/g, '').length !== 8) { addError('guardian_phone', 'Le numéro du tuteur doit avoir 8 chiffres.'); ok = false; }
+            }
+            if (!ok) {
+                const firstErr = document.querySelector('.x-error:not([hidden])');
+                if (firstErr) { firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+            }
+            return ok;
+        };
+
+        computeButtonState();
+        document.addEventListener('input', computeButtonState);
+        document.addEventListener('change', computeButtonState);
+
+        // Envoi POST — contrat backend : JSON + Content-Type text/plain;charset=utf-8
+        btn.addEventListener('click', () => {
+            clearErrors();
+            if (!validate()) { return; }
+            btn.textContent = 'Soumise…';
+            btn.disabled = true;
+            fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(collectData())
+            })
+                .then((r) => r.json())
+                .then((json) => {
+                    btn.textContent = 'S\'inscrire';
+                    btn.disabled = false;
+                    const isOk = json && (json.ok === true || json.status === 'ok');
+                    if (!isOk) {
+                        const errs = (json && json.errors) || {};
+                        if (Object.keys(errs).length) {
+                            // Erreurs par champ — retour à l'étape concernée + message global visible
+                            const firstKey = Object.keys(errs)[0];
+                            Object.keys(errs).forEach((k) => addError(k, errs[k] || (json && json.message) || ''));
+                            const el = document.getElementById(firstKey);
+                            if (el) { el.focus(); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+                            showStatus(errs[firstKey] || (json && json.message) || 'Échec — veuillez réessayer.', true);
+                            return;
+                        }
+                        if (json && json.code === 'busy') {
+                            // Proposer « Réessayer »
+                            btn.textContent = 'Réessayer';
+                            btn.disabled = false;
+                            showStatus(json.message || 'Service occupé. Réessayez.', false);
+                            return;
+                        }
+                        // Autres codes (duplicate_phone, too_fast, not_open, closed, …) : message serveur
+                        showStatus((json && (json.message || json.message_fr)) || 'Échec — veuillez réessayer.', true);
+                        return;
+                    }
+                    // ok → redirection vers la page de confirmation (message + bouton QUITTER)
+                    try { window.localStorage.removeItem(STARTED_AT_KEY); } catch (e) {}
+                    const params = new URLSearchParams({ message: 'Inscription validée', reference: json.reference || '' });
+                    window.location.assign('confirm.html?' + params.toString());
+                })
+                .catch(() => {
+                    btn.textContent = 'S\'inscrire';
+                    btn.disabled = false;
+                    showStatus('Échec — veuillez réessayer.', true);
+                });
+        });
+
+        // Au chargement : statut d'ouverture — { open, message_fr }
+        fetch(APPS_SCRIPT_URL)
+            .then((r) => r.text())
+            .then((t) => { try { return JSON.parse(t); } catch (e) { return {}; } })
+            .then((d) => {
+                if (!d.open) {
+                    showStatus(d.message_fr || 'Inscriptions fermées.', true);
+                    document.querySelector('.x-action').hidden = true;
+                }
+            })
+            .catch(() => { /* sans statut : afficher le formulaire */ });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+/* ==========================================================================
+   DESIGN.md — Concours d'entrepreneuriat — thème clair (v1.0)
+   Fond Papier / bouton principal Soleil / accents (vert, rouge faso, bleu pluie).
+
+   Conventions :
+   - Typographie : Bricolage Grotesque Variable (titres) + Atkinson Hyperlegible (corps).
+   - Corps ≥ 16 px, interligne texte 1.5, titres 1.2.
+   - Aucun dégradé, aucune ombre portée, aucune couleur seule (texte + pictogramme).
+   - Motion : 150 ms max, slide horizontal subtil.
+
+   Polices : sous-ensembles latin auto-hébergés (`fonts/`), zéro CDN.
+   ========================================================================== */
+
+@font-face {
+    font-family: 'Bricolage Grotesque Variable';
+    src: url('../fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atkinson Hyperlegible';
+    src: url('../fonts/atkinson-hyperlegible-latin-400-normal.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atkinson Hyperlegible';
+    src: url('../fonts/atkinson-hyperlegible-latin-700-normal.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* ——— Palette (DESIGN.md) ——— */
+    --papier: #F6F7F3;
+    --surface: #FFFFFF;
+    --surface-alt: #EDF1EC;
+    --encre: #10241F;
+    --texte: #10241F;
+    --texte-secondaire: #55685F;
+    --ligne: #D8DFD6;
+
+    --soleil: #F5B31A;
+    --indigo: #1E2A5E;
+    --vert: #167549;
+    --vert-success: #1F7A4D;
+    --rouge: #C62F2F;
+    --bleu: #2E6FB7;
+
+    /* ——— Typographie (DESIGN.md) ——— */
+    --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', 'Trebuchet MS', sans-serif;
+    --font-body: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
+
+    --taille-corps: 16px;
+    --interligne-corps: 1.5;
+    --interligne-titre: 1.2;
+
+    --hauteur-champ: 52px;
+    --rayon-champ: 10px;
+    --rayon-bouton: 12px;
+    --largeur-page: 560px;
+
+    /* ——— Motion (DESIGN.md) ——— */
+    --duree-motion: 150ms;
+}
+
+/* ——— Base ——— */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--papier);
+    color: var(--texte);
+    font-family: var(--font-body);
+    font-size: var(--taille-corps);
+    line-height: var(--interligne-corps);
+}
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; }
+h1 { font-size: 36px; margin: 0 0 12px; }
+h2 { font-size: 28px; margin: 0 0 12px; }
+h3 { font-size: 20px; margin: 0 0 8px; }
+p { margin: 0 0 12px; }
+.muted { color: var(--texte-secondaire); font-size: 14px; }
+
+a { color: var(--bleu); }
+
+:focus-visible { outline: 3px solid var(--indigo); outline-offset: 2px; }
+
+/* ——— Bande de rouleau (stripe — Dan Fani / DESIGN.md) ——— */
+.stripe {
+    height: 8px;
+    background: var(--soleil);
+}
+
+/* ——— Colonne ——— */
+.page { max-width: var(--largeur-page); margin: 0 auto; padding: 24px 16px calc(96px + env(safe-area-inset-bottom)); }
+
+/* ——— Barre de progression (8 px, bande soleil sur Papier) ——— */
+.x-progress { height: 8px; background: var(--surface-alt); border-radius: 4px; overflow: hidden; }
+.x-progress .fill { height: 100%; background: repeating-linear-gradient(90deg, var(--soleil) 0 10px, var(--papier) 10px 20px); }
+
+/* ——— Champs ——— */
+.x-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
+
+/* ——— Rangée de champs côte à côte ——— */
+.x-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.x-field label { font-size: 16px; line-height: 24px; color: var(--texte); }
+.x-field input,
+.x-field select,
+.x-field textarea,
+.x-select select,
+.x-phone input,
+.x-birth input,
+.x-birth select {
+    width: 100%;
+    min-height: 50px;
+    background: var(--surface);
+    color: var(--texte);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon-champ);
+    padding: 14px 12px;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: var(--font-body);
+    outline: none;
+}
+.x-field input:focus,
+.x-field select:focus,
+.x-field textarea:focus,
+.x-select select:focus,
+.x-phone input:focus,
+.x-birth input:focus,
+.x-birth select:focus {
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px rgba(30, 42, 94, 0.25);
+}
+.x-field input.err,
+.x-field select.err,
+.x-field textarea.err,
+.x-select select.err,
+.x-phone input.err,
+.x-birth input.err,
+.x-birth select.err {
+    border-color: var(--rouge);
+    box-shadow: 0 0 0 3px rgba(198, 47, 47, 0.18);
+}
+.x-field textarea { min-height: 120px; resize: vertical; }
+.x-field .help { font-size: 14px; line-height: 20px; color: var(--texte-secondaire); }
+.x-field .x-error,
+.x-error { display: inline-flex; align-items: center; gap: 6px; color: var(--rouge); font-size: 14px; line-height: 20px; }
+
+/* ——— Téléphone — préfixe +226 ——— */
+.x-phone { display: flex; gap: 6px; }
+.x-phone .prefix {
+    display: inline-flex;
+    align-items: center;
+    min-height: 50px;
+    padding: 0 12px;
+    background: var(--surface-alt);
+    color: var(--texte);
+    border: 1px solid var(--ligne);
+    border-right: none;
+    border-radius: var(--rayon-champ) 0 0 var(--rayon-champ);
+    font-size: 16px;
+}
+.x-phone input { border-radius: 0 var(--rayon-champ) var(--rayon-champ) 0; }
+
+/* ——— Date de naissance — trois listes ——— */
+.x-birth { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+
+/* ——— Tuiles de choix (sans radio natif) ——— */
+.x-tiles { display: flex; flex-direction: column; gap: 12px; }
+
+/* ——— Tuiles côte à côte (ex. Genre) ——— */
+.x-tiles-row { flex-direction: row; }
+.x-tiles-row .x-tile { flex: 1; }
+.x-tile {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 12px;
+    background: var(--surface);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon-champ);
+    color: var(--texte);
+}
+.x-tile:focus-visible { border-color: var(--indigo); outline: 3px solid var(--indigo); outline-offset: 2px; }
+.x-tile.sel { border: 2px solid var(--indigo); }
+.x-tile .dot { width: 14px; height: 14px; margin: 0 8px; border-radius: 50%; background: var(--ligne); flex: none; }
+.x-tile.sel .dot { background: var(--indigo); }
+
+/* ——— Calendrier de naissance (JJ / MM / AAAA) ——— */
+.x-calendar { display: flex; align-items: center; gap: 8px; position: relative; }
+.x-calendar input { flex: 1; min-height: 52px; background: var(--surface); color: var(--texte); border: 1px solid var(--ligne); border-radius: var(--rayon-champ) 0 0 var(--rayon-champ); padding: 14px 12px; font-size: 16px; line-height: 24px; font-family: var(--font-body); outline: none; }
+.x-calendar input:focus { border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(30, 42, 94, 0.25); }
+.x-calendar-toggle { min-height: 52px; width: 52px; background: var(--surface); color: var(--texte); border: 1px solid var(--ligne); border-left: none; border-radius: 0 var(--rayon-champ) var(--rayon-champ) 0; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+.x-calendar-toggle:focus-visible { outline: 3px solid var(--indigo); outline-offset: 2px; }
+.x-calendar-panel { position: absolute; top: calc(100% + 8px); left: 0; z-index: 50; background: var(--surface); border: 1px solid var(--ligne); border-radius: var(--rayon-champ); padding: 12px; display: flex; gap: 10px; min-width: 300px; }
+.x-cal-col { display: flex; flex-direction: column; gap: 4px; }
+.x-cal-label { font-size: 12px; color: var(--texte-secondaire); }
+.x-cal-list { display: flex; flex-wrap: wrap; gap: 6px; max-height: 150px; overflow-y: auto; }
+.x-cal-option { min-width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; background: var(--surface-alt); color: var(--texte); border: 1px solid var(--ligne); border-radius: 8px; font-size: 14px; line-height: 1; cursor: pointer; }
+.x-cal-option:focus-visible { outline: 3px solid var(--indigo); outline-offset: 2px; }
+.x-cal-option[aria-pressed="true"] { background: var(--surface); border-color: var(--indigo); color: var(--indigo); font-weight: 700; }
+.x-cal-ok { margin-top: 10px; align-self: flex-start; min-height: 40px; padding: 0 14px; background: var(--soleil); color: var(--indigo); border: none; border-radius: var(--rayon-champ); font-weight: 700; cursor: pointer; font-family: var(--font-body); font-size: 14px; }
+.x-cal-ok:focus-visible { outline: 3px solid var(--indigo); outline-offset: 2px; }
+.x-cal-ok:disabled { background: var(--surface-alt); color: var(--texte-secondaire); border: 1px solid var(--ligne); cursor: not-allowed; }
+.x-cal-ok:not(:disabled) { cursor: pointer; }
+
+@media (max-width: 480px) {
+    .x-calendar-panel {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        width: auto;
+        min-width: 0;
+        max-height: calc(100vh - 220px);
+        overflow-y: auto;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .x-cal-col { flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; }
+    .x-cal-list { max-height: 130px; overflow-y: auto; }
+}
+
+/* ——— Champ année (liste dans le calendrier) ——— */
+.x-cal-list[data-group="year"] { gap: 4px; }
+.x-cal-list[data-group="year"] .x-cal-option { min-width: 44px; }
+
+
+/* ——— Sélecteur (liste déroulante) ——— */
+.x-select { display: flex; flex-direction: column; gap: 6px; }
+.x-select label { font-size: 16px; line-height: 24px; color: var(--texte); }
+.x-select select { min-height: 52px; }
+
+/* ——— Boutons ——— */
+.x-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 52px;
+    padding: 0 16px;
+    background: var(--surface);
+    color: var(--texte);
+    border: 1px solid var(--ligne);
+    border-radius: var(--rayon-bouton);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    cursor: pointer;
+}
+.x-btn:focus-visible { outline: 3px solid var(--indigo); outline-offset: 2px; }
+.btn-primary { background: var(--soleil); color: var(--indigo); border: none; }
+.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-ghost { background: transparent; color: var(--indigo); border: none; }
+
+/* ——— Barre d'actions fixe (Retour / Continuer — safe area) ——— */
+.x-action {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 12px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: var(--papier);
+}
+.x-action .x-btn { flex: 1; }
+
+/* ——— États de succès ——— */
+.x-success { display: inline-flex; align-items: center; gap: 6px; color: var(--vert-success); font-size: 16px; }
+
+/* ——— Honeypot (anti-spam) ——— */
+.x-hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+/* ——— Motion ——— */
+.x-field input,
+.x-field select,
+.x-field textarea,
+.x-select select,
+.x-phone input,
+.x-birth input,
+.x-birth select,
+.x-tile,
+.x-btn { transition: border-color var(--duree-motion) ease, box-shadow var(--duree-motion) ease, background var(--duree-motion) ease; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inscription — Concours d'entrepreneuriat (Agrilink)</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <div class="page">
+        <div class="stripe" aria-hidden="true"></div>
+        <h1>LIBELLE CONCOURS</h1>
+        <p id="confirm-message" class="x-success" role="status"></p>
+        <p id="confirm-reference" class="muted"></p>
+    </div>
+
+    <div class="x-action">
+        <button type="button" class="x-btn btn-primary" id="btn-quit">QUITTER</button>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const messageEl = document.getElementById('confirm-message');
+        const referenceEl = document.getElementById('confirm-reference');
+        const quitBtn = document.getElementById('btn-quit');
+
+        const message = params.get('message') || 'Inscription validée';
+        const reference = params.get('reference') || '';
+
+        messageEl.textContent = message;
+        if (reference) {
+            referenceEl.textContent = 'Ta référence : ' + reference + '. Note-la.';
+        }
+
+        quitBtn.addEventListener('click', () => { window.close(); });
+    </script>
+
+</body>
+</html>
