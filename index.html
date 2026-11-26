@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscription — Concours d'entrepreneuriat</title>
+    <title>Formulaire d'inscription</title>
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/config.js"></script>
 </head>
@@ -11,13 +11,18 @@
 
     <div class="page">
         <div class="stripe" aria-hidden="true"></div>
-        <h1>LIBELLE CONCOURS</h1>
+        <h1>FORMULAIRE D'INSCRIPTION</h1>
+
+        <div class="x-progress" role="progressbar" aria-label="Progression de l'inscription" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="form-progress">
+            <div class="fill" id="form-progress-fill" style="width: 0%;"></div>
+        </div>
+        <p class="muted" id="progress-label" style="margin-top:6px;">0 Champ sur 5 complété</p>
 
         <form id="the-form" novalidate>
             <!-- Champ piège anti-spam (vide — Backend rejette si rempli) -->
             <input type="text" name="telephone_personnel" class="x-hp" tabindex="-1" autocomplete="off" value="">
 
-            <!-- Identité -->
+            <h2>Ton identité</h2>
             <div class="x-row">
                 <div class="x-field"><label for="last_name">Nom</label><input id="last_name" name="last_name" type="text" required></div>
                 <div class="x-field"><label for="first_name">Prénom</label><input id="first_name" name="first_name" type="text" required></div>
@@ -42,13 +47,12 @@
             </div>
             <div class="x-field"><label for="email">E-mail</label><input id="email" name="email" type="email" placeholder="exemple@gmail.com"></div>
 
-            <!-- Localisation -->
+            <h2>Où tu vis</h2>
             <div class="x-field"><label for="arrondissement">Arrondissement</label><div class="x-select"><select id="arrondissement" name="arrondissement"><option value="">Choisir…</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div></div>
 
             <div class="x-field"><label for="neighborhood">Quartier</label><input id="neighborhood" name="neighborhood" type="text" placeholder="Ex : Ouagadougou"></div>
 
-            <!-- Profil -->
-
+            <h2>Ton profil</h2>
             <div class="x-field"><label for="institution">Établissement</label><input id="institution" name="institution" type="text" placeholder="Ex : Lycée / Université"></div>
             <div class="x-row">
                 <div class="x-field"><label for="level">Niveau</label><div class="x-select"><select id="level" name="level"><option value="">Choisir…</option><option value="seconde">Seconde</option><option value="premiere">Première</option><option value="terminale">Terminale</option><option value="licence_1">Licence 1</option><option value="licence_2">Licence 2</option><option value="licence_3">Licence 3</option><option value="master_1">Master 1</option><option value="master_2">Master 2</option><option value="doctorat">Doctorat</option></select></div></div>
@@ -56,10 +60,7 @@
             </div>
             <div class="x-field"><label for="youth_movement">Mouvement de jeunesse</label><input id="youth_movement" name="youth_movement" type="text" placeholder="Ex : Jeunesse Rurale"></div>
 
-            <!-- Connexion / appareil -->
-
-
-
+            <h2>Ta connexion</h2>
 
             <!-- has_internet (oui/non tiles) -->
             <div class="x-field">
@@ -70,7 +71,7 @@
                 </div>
             </div>
 
-            <!-- Motivation -->
+            <h2>Ta motivation et ton projet</h2>
             <div class="x-field"><label for="motivation">Ta motivation</label><textarea id="motivation" name="motivation" rows="4" required></textarea><p class="x-error" id="err-motivation" role="alert" hidden></p></div>
 
             <!-- Projet -->
@@ -110,7 +111,7 @@
                 </div>
             </div>
 
-            <!-- Consentements -->
+            <h2>Consentements</h2>
             <div class="x-field">
                 <label>Consentements</label>
                 <div class="x-tiles" role="radiogroup" aria-label="Consentements">
@@ -126,7 +127,7 @@
         </form>
     </div>
 
-    <div id="status-message" class="x-success" hidden></div>
+    <div id="status-message" class="x-success" role="status" aria-live="polite" hidden></div>
 
     <div class="x-action">
         <button type="button" class="x-btn btn-primary" id="btn-submit">S'inscrire</button>
@@ -146,12 +147,22 @@
             const f = document.getElementById(field);
             if (!f) { return; }
             f.classList.add('err');
-            const err = document.getElementById('err-' + field);
-            if (err) { err.textContent = msg; err.hidden = false; }
+            f.setAttribute('aria-invalid', 'true');
+            let err = document.getElementById('err-' + field);
+            if (!err) {
+                err = document.createElement('p');
+                err.className = 'x-error';
+                err.id = 'err-' + field;
+                err.setAttribute('role', 'alert');
+                err.setAttribute('aria-live', 'polite');
+                f.closest('.x-field').appendChild(err);
+            }
+            err.textContent = msg;
+            err.hidden = false;
         };
 
         const clearErrors = () => {
-            document.querySelectorAll('.err').forEach((el) => el.classList.remove('err'));
+            document.querySelectorAll('.err').forEach((el) => { el.classList.remove('err'); el.setAttribute('aria-invalid', 'false'); });
             document.querySelectorAll('[id^="err-"]').forEach((el) => { el.hidden = true; el.textContent = ''; });
         };
 
@@ -161,8 +172,78 @@
         };
         document.addEventListener('click', (e) => {
             const tile = e.target.closest('.x-tile');
-            if (tile) { selectTile(tile.closest('.x-tiles'), tile); }
+            if (tile) {
+                selectTile(tile.closest('.x-tiles'), tile);
+                const g = tile.closest('.x-tiles');
+                if (g) { g.querySelectorAll('.x-tile').forEach((t) => t.setAttribute('aria-checked', t === tile ? 'true' : 'false')); }
+                computeButtonState();
+            }
         });
+        document.addEventListener('keydown', (e) => {
+            const tile = e.target.closest('.x-tile');
+            if (!tile) { return; }
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectTile(tile.closest('.x-tiles'), tile);
+                const g = tile.closest('.x-tiles');
+                if (g) { g.querySelectorAll('.x-tile').forEach((t) => t.setAttribute('aria-checked', t === tile ? 'true' : 'false')); }
+                computeButtonState();
+            }
+        });
+
+        // ---------- Améliorations accessibilité + validation temps réel ----------
+        // ARIA sur les tuiles (WCAG 4.1.2) + navigation clavier
+        document.querySelectorAll('#the-form .x-tiles').forEach((g) => {
+            g.setAttribute('role', 'radiogroup');
+            if (!g.getAttribute('aria-label')) { g.setAttribute('aria-label', 'Choix'); }
+            g.querySelectorAll('.x-tile').forEach((t) => {
+                t.setAttribute('role', 'radio');
+                t.setAttribute('tabindex', '0');
+                t.setAttribute('aria-checked', t.classList.contains('sel') ? 'true' : 'false');
+            });
+        });
+        // Astérisque visuel sur les libellés obligatoires (décoratif → aria-hidden)
+        ['last_name', 'first_name', 'telephone', 'motivation', 'discovery_source'].forEach((id) => {
+            const el = document.getElementById(id);
+            if (!el) { return; }
+            const label = el.closest('.x-field').querySelector('label[for="' + id + '"]');
+            if (label && !label.querySelector('.req-star')) {
+                const star = document.createElement('span');
+                star.className = 'req-star';
+                star.setAttribute('aria-hidden', 'true');
+                star.textContent = ' *';
+                label.appendChild(star);
+            }
+        });
+        // ARIA + validation temps réel sur les champs obligatoires
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        ['last_name', 'first_name', 'telephone', 'motivation', 'discovery_source'].forEach((id) => {
+            const el = document.getElementById(id);
+            if (!el) { return; }
+            el.setAttribute('aria-required', 'true');
+            el.setAttribute('aria-invalid', 'false');
+            el.setAttribute('aria-describedby', 'err-' + id);
+            const validateOne = () => {
+                if (!el.value.trim()) { addError(id, id === 'last_name' ? 'Nom obligatoire.' : id === 'first_name' ? 'Prénom obligatoire.' : id === 'telephone' ? 'Le numéro de téléphone est obligatoire.' : id === 'motivation' ? 'La motivation est obligatoire.' : 'Comment as-tu connu le concours ?'); return; }
+                if (id === 'telephone' && el.value.replace(/[^0-9]/g, '').length !== 8) { addError(id, 'Le numéro doit avoir 8 chiffres.'); return; }
+                el.classList.remove('err');
+                el.setAttribute('aria-invalid', 'false');
+                const err = document.getElementById('err-' + id); if (err) { err.hidden = true; err.textContent = ''; }
+            };
+            el.addEventListener('blur', validateOne);
+            el.addEventListener('input', () => { if (el.classList.contains('err')) { validateOne(); } });
+        });
+        // E-mail : validation de format au blur (si rempli)
+        const emailEl = document.getElementById('email');
+        if (emailEl) {
+            emailEl.setAttribute('aria-describedby', 'err-email');
+            emailEl.addEventListener('blur', () => {
+                const v = emailEl.value.trim();
+                if (!v) { return; }
+                if (!emailRegex.test(v)) { addError('email', 'Adresse e-mail invalide.'); }
+                else { emailEl.classList.remove('err'); emailEl.setAttribute('aria-invalid', 'false'); const err = document.getElementById('err-email'); if (err) { err.hidden = true; err.textContent = ''; } }
+            });
+        }
 
         // ---------- Date de naissance — sélecteurs natifs (Jour / Mois / Année) ----------
         const birthDay = document.getElementById('birth_day');
@@ -247,13 +328,12 @@
             if (y && m && dd) { d.birth_date = y + '-' + String(m).padStart(2, '0') + '-' + String(dd).padStart(2, '0'); }
             // Si mineur : consentement du tuteur implicite (pas de case à cocher)
             if (guardianBlock && !guardianBlock.hidden) { d.guardian_consent = 'true'; }
-            // Tuiles → champs contrat (gender, lives_in_ouaga, has_internet, consentements…)
+            // Tuiles → champs contrat (gender, has_internet, projet, formation…)
             const keyMap = {
                 'Genre': 'gender',
                 'As-tu accès à Internet ?': 'has_internet',
                 'A un projet': 'has_project',
-                'A déjà suivi une formation': 'had_previous_training',
-                'Consentements': ['data_consent', 'rules_accepted']
+                'A déjà suivi une formation': 'had_previous_training'
             };
             document.querySelectorAll('#the-form .x-tiles').forEach((g) => {
                 const sel = g.querySelector('.x-tile.sel');
@@ -261,6 +341,9 @@
                 const val = sel ? sel.getAttribute('data-value') : '';
                 if (keys) { (Array.isArray(keys) ? keys : [keys]).forEach((k) => { d[k] = val; }); }
             });
+            // Consentements : implicites par la lecture des règles (voir lien ci-dessous) — pas de case à cocher
+            d.data_consent = 'true';
+            d.rules_accepted = 'true';
             d.started_at = formStartedAt;
             if (typeof crypto !== 'undefined' && crypto.randomUUID) {
                 if (!submissionId) { submissionId = crypto.randomUUID(); }
@@ -302,15 +385,27 @@
             return ok;
         };
 
+        const updateProgress = () => {
+            const ids = ['last_name', 'first_name', 'telephone', 'motivation', 'discovery_source'];
+            const done = ids.filter((id) => { const el = document.getElementById(id); return el && String(el.value).trim(); }).length;
+            const bar = document.getElementById('form-progress');
+            const fill = document.getElementById('form-progress-fill');
+            const label = document.getElementById('progress-label');
+            const pct = Math.round((done / ids.length) * 100);
+            if (fill) { fill.style.width = pct + '%'; }
+            if (bar) { bar.setAttribute('aria-valuenow', String(pct)); }
+            if (label) { label.textContent = done + ' Champ' + (done > 1 ? 's' : '') + ' sur ' + ids.length + ' complété' + (done > 1 ? 's' : ''); }
+        };
         computeButtonState();
-        document.addEventListener('input', computeButtonState);
-        document.addEventListener('change', computeButtonState);
+        updateProgress();
+        document.addEventListener('input', () => { computeButtonState(); updateProgress(); });
+        document.addEventListener('change', () => { computeButtonState(); updateProgress(); });
 
         // Envoi POST — contrat backend : JSON + Content-Type text/plain;charset=utf-8
         btn.addEventListener('click', () => {
             clearErrors();
             if (!validate()) { return; }
-            btn.textContent = 'Soumise…';
+            btn.textContent = 'Envoi en cours…';
             btn.disabled = true;
             fetch(APPS_SCRIPT_URL, {
                 method: 'POST',
