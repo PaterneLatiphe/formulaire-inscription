@@ -1,0 +1,8 @@
+# Cloudflare Workers — déploiement du formulaire d'inscription
+# Le dossier public/ est la racine du site (fichiers statiques uniquement).
+name = "polished-wind-202c"
+compatibility_date = "2026-11-26"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
